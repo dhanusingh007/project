@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="C:\Users\dhanu\hero\html\fevicon.ico" type="x-icon">
+<title>TODOLIST by DHANU SINGH</title>
+<style>
+body {
+  margin: 0;
+  min-width: 250px;
+}
+* {
+  box-sizing: border-box;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  cursor:auto;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  background:honeydew;
+  font-size: 25px;
+  transition: 1.s;
+  -webkit-user-select:auto;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ul li:nth-child(odd) {
+  background:darkgrey;
+}
+ul li:hover {
+  background:rgb(70, 69, 69);
+}
+ul li.checked {
+  background:crimson;
+  color: #fff;
+  text-decoration: line-through;
+}
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #ffffff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #000000;
+  color: rgb(160, 160, 160);
+}
+.header {
+  background-color: #060606;
+  padding: 30px 40px;
+  color: rgb(216, 216, 216);
+  text-align: center;
+}
+.header:after {
+  content: "New Task Here ^";
+  display: table;
+  clear: both;
+}
+input {
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+  margin-right: 10px ;
+}
+.addBtn {
+  padding: 10px;
+  width: 20%;
+  background: #2200ff;
+  color: #fcfcfc;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+  outline: 2px solid ;
+}
+
+.addBtn:hover {
+  background-color: #0cf200;
+}
+</style>
+</head>
+<body>
+
+<div id="myDIV" class="header">
+  <h2 style="margin:5px">WHAT TO DO</h2>
+  <input type="text" id="myInput" placeholder="NEW TASK....">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+  <li>gym at 5am</li>
+  <li class="checked">bill and fee</li>
+  <li>class</li>
+  <li>homework</li>
+  <li>shopping</li>
+  <li>office work</li>
+</ul>
+
+<script>
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
